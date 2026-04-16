@@ -1,0 +1,5 @@
+.local/
+gh.tar.gz
+gh.zip
+.DS_Store
+node_modules/
