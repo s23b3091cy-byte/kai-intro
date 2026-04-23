@@ -248,6 +248,172 @@ section {
     font-size: 0.95rem;
 }
 
+/* Forex Section */
+.forex {
+    background-color: #0d1323; /* slightly darker to distinguish */
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.section-header .section-title {
+    margin-bottom: 0;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ef4444; /* red for live */
+    background: rgba(239, 68, 68, 0.1);
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+
+.live-indicator .dot {
+    width: 8px;
+    height: 8px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.fx-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.fx-card {
+    text-decoration: none;
+    display: block;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s var(--transition-easing), border-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.fx-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
+}
+
+.fx-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.fx-header .pair {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'Outfit';
+}
+
+.fx-header .status {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.price-display {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: 'Outfit';
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    transition: color 0.3s;
+}
+
+.price-display .currency-symbol {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.fx-card.tick-up .price-display { color: #10b981; }
+.fx-card.tick-down .price-display { color: #ef4444; }
+
+.trade-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.level {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.level.tp { border-left: 3px solid #10b981; }
+.level.sl { border-left: 3px solid #ef4444; }
+
+.level span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.level strong {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    font-family: 'Outfit';
+    margin: 4px 0;
+}
+
+.level small {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.rationale-box {
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 2rem;
+    border-radius: 16px;
+}
+
+.rationale-box h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.rationale-box p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.rationale-box strong {
+    color: var(--text-primary);
+}
+
 /* Footer */
 footer {
     padding: 6rem 0;

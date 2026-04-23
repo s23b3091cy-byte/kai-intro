@@ -17,7 +17,8 @@
             <ul class="nav-links">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#philosophy">Philosophy</a></li>
-                <li><a href="#stocks">Top 5 Stocks</a></li>
+                <li><a href="#stocks">Stocks</a></li>
+                <li><a href="#forex">Forex</a></li>
                 <li><a href="#vision">Future</a></li>
             </ul>
         </nav>
@@ -101,6 +102,73 @@
                         <h3>S&P Global</h3>
                         <p>格付けと指数算出における実質的独占。市場の拡大にそのまま追従する、極めて効率的なビジネスモデル。</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forex Section -->
+        <section id="forex" class="forex">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">FX Short-Term Trading</h2>
+                    <div class="live-indicator">
+                        <span class="dot"></span> LIVE DATA (Simulated)
+                    </div>
+                </div>
+                <p class="subtitle reveal delay-1">ボラティリティを活用する短期売買。厳格なリスクリワード（1:2以上）とATRに基づく損切り設定が必須。</p>
+                
+                <div class="fx-grid">
+                    <!-- USD/JPY -->
+                    <a href="https://jp.tradingview.com/symbols/USDJPY/" target="_blank" rel="noopener" class="fx-card reveal delay-1" id="fx-usdjpy">
+                        <div class="fx-header">
+                            <span class="pair">USD/JPY</span>
+                            <span class="status">Updating...</span>
+                        </div>
+                        <div class="price-display">
+                            <span class="currency-symbol">¥</span>
+                            <span class="current-price" data-base="150.500">150.500</span>
+                        </div>
+                        <div class="trade-levels">
+                            <div class="level tp">
+                                <span>Take Profit (利確)</span>
+                                <strong class="tp-value">--</strong>
+                                <small>Risk:Reward 1:2 を基準としたターゲット</small>
+                            </div>
+                            <div class="level sl">
+                                <span>Stop Loss (損切)</span>
+                                <strong class="sl-value">--</strong>
+                                <small>直近サポートライン / ATRベースの撤退ライン</small>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- EUR/JPY -->
+                    <a href="https://jp.tradingview.com/symbols/EURJPY/" target="_blank" rel="noopener" class="fx-card reveal delay-2" id="fx-eurjpy">
+                        <div class="fx-header">
+                            <span class="pair">EUR/JPY</span>
+                            <span class="status">Updating...</span>
+                        </div>
+                        <div class="price-display">
+                            <span class="currency-symbol">¥</span>
+                            <span class="current-price" data-base="163.200">163.200</span>
+                        </div>
+                        <div class="trade-levels">
+                            <div class="level tp">
+                                <span>Take Profit (利確)</span>
+                                <strong class="tp-value">--</strong>
+                                <small>ユーロ特有のトレンドフォロー型ターゲット</small>
+                            </div>
+                            <div class="level sl">
+                                <span>Stop Loss (損切)</span>
+                                <strong class="sl-value">--</strong>
+                                <small>ボラティリティ急拡大事のブレイクアウト狩り対策</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="rationale-box reveal delay-3">
+                    <h3>【短期トレードの根拠】</h3>
+                    <p>短期トレード（デイトレード・スキャルピング）では、勝率よりも<strong>「損小利大」</strong>の徹底が資産形成の鍵となります。毎秒の価格変動（ノイズ）に翻弄されないよう、エントリー時点で必ず<strong>Stop Loss (損切)</strong> を設定し、想定外の損失を排除します。同時に、ATR（アベレージ・トゥルー・レンジ）等の指標から1日あたりのボラティリティを算出し、論理的な <strong>Take Profit (利確)</strong> を設定しています。</p>
                 </div>
             </div>
         </section>
