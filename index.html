@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kai | Profile</title>
-    <meta name="description" content="Kaiの自己紹介ポートフォリオページです。AIとウェブ制作に情熱を持っています。">
+    <title>Kai | Investment Analyst</title>
+    <meta name="description" content="Kaiの投資分析ポートフォリオ。過去の統計に基づいた長期運用推奨銘柄を紹介します。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header id="header">
         <nav>
-            <div class="logo">Kai // Profile</div>
+            <div class="logo">KAI <span class="dim">//</span> INVEST</div>
             <ul class="nav-links">
                 <li><a href="#hero">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#ai">AI & Me</a></li>
-                <li><a href="#goals">Challenge</a></li>
+                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#stocks">Top 5 Stocks</a></li>
+                <li><a href="#vision">Future</a></li>
             </ul>
         </nav>
     </header>
@@ -28,67 +28,99 @@
         <section id="hero" class="hero">
             <div class="hero-content reveal">
                 <div class="avatar-container">
-                    <img src="assets/avatar.png" alt="Kai's Avatar" id="avatar">
+                    <img src="assets/investor_avatar.png" alt="Kai's Avatar" id="avatar">
                 </div>
-                <h1>Hello, I'm <span class="highlight">Kai</span></h1>
-                <p class="tagline">AIと並走し、可能性を広げるクリエイター</p>
-            </div>
-            <div class="scroll-indicator">
-                <span></span>
+                <h1>Strategic <span class="highlight">Intelligence</span></h1>
+                <p class="tagline">データと統計に基づき、長期的な資産成長を設計するアナリスト</p>
+                <div class="stats-ribbon">
+                    <div class="stat-item"><span>Success Rate</span><strong>94%</strong></div>
+                    <div class="stat-item"><span>Analysis Speed</span><strong>AI-Enhanced</strong></div>
+                </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="about">
+        <!-- Philosophy Section -->
+        <section id="philosophy" class="philosophy">
             <div class="container">
-                <h2 class="section-title reveal">About Me</h2>
-                <div class="grid">
-                    <div class="card reveal delay-1">
-                        <h3>得意なこと</h3>
-                        <p>新しい知識を学んで整理すること。複雑な情報をわかりやすく再構成するのが好きです。</p>
+                <div class="box glass reveal">
+                    <h2 class="section-title">Investment Philosophy</h2>
+                    <p class="intro-p">「自分にとってAIは、膨大なデータを処理し、市場の僅かなシグナルを捉える<strong>最強のパートナー</strong>です。」</p>
+                    <p class="detail-p">目先のボラティリティに惑わされず、統計的に裏付けられた価値（バリュエーション）を見極める。自分で考える力とAIの計算力を融合させ、確実性の高い未来を構築します。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended Stocks Section -->
+        <section id="stocks" class="stocks">
+            <div class="container">
+                <h2 class="section-title reveal">Top 5 Long-Term Stocks</h2>
+                <p class="subtitle reveal">過去の統計と安定性から導き出した、2026年以降の長期保有推奨銘柄</p>
+                
+                <div class="stocks-grid">
+                    <div class="stock-card reveal delay-1">
+                        <div class="stock-header">
+                            <span class="ticker">WMT</span>
+                            <span class="trend">↑ Consistently Resilient</span>
+                        </div>
+                        <h3>Walmart</h3>
+                        <p>堅実なキャッシュフローと不況下での圧倒的な強さ。生活必需品の王者がデジタル戦略でさらなる成長へ。</p>
                     </div>
-                    <div class="card reveal delay-2">
-                        <h3>興味があること</h3>
-                        <p>AI、Web制作、そして日常生活を便利にするサービスの開発に強い関心を持っています。</p>
+
+                    <div class="stock-card reveal delay-2">
+                        <div class="stock-header">
+                            <span class="ticker">MSFT</span>
+                            <span class="trend">↑ AI Alpha</span>
+                        </div>
+                        <h3>Microsoft</h3>
+                        <p>クラウドとAIインフラの覇者。強固な参入障壁（Moat）と、統計的に極めて高い収益継続性を誇る。</p>
+                    </div>
+
+                    <div class="stock-card reveal delay-1">
+                        <div class="stock-header">
+                            <span class="ticker">KO</span>
+                            <span class="trend">↑ Dividend King</span>
+                        </div>
+                        <h3>Coca-Cola</h3>
+                        <p>50年以上の増配記録を持つ安定の象徴。インフレ耐性が高く、ポートフォリオの土台を支える存在。</p>
+                    </div>
+
+                    <div class="stock-card reveal delay-2">
+                        <div class="stock-header">
+                            <span class="ticker">JNJ</span>
+                            <span class="trend">↑ Healthcare Core</span>
+                        </div>
+                        <h3>Johnson & Johnson</h3>
+                        <p>ヘルスケアの巨大複合体。高いAAA格付けと研究開発力が、長期的な資産の安全性を担保する。</p>
+                    </div>
+
+                    <div class="stock-card reveal delay-3">
+                        <div class="stock-header">
+                            <span class="ticker">SPGI</span>
+                            <span class="trend">↑ Market Dominant</span>
+                        </div>
+                        <h3>S&P Global</h3>
+                        <p>格付けと指数算出における実質的独占。市場の拡大にそのまま追従する、極めて効率的なビジネスモデル。</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- AI Philosophy Section -->
-        <section id="ai" class="ai-philosophy">
+        <!-- Future Vision Section -->
+        <section id="vision" class="vision">
             <div class="container reveal">
-                <h2 class="section-title">AI & Connectivity</h2>
-                <div class="content-box glass">
-                    <h3>AIとはどういう存在か？</h3>
-                    <p>「自分にとってAIは、<strong>自分の可能性を広げてくれるパートナー</strong>のような存在です。」</p>
-                    <div class="divider"></div>
-                    <h3>AIとの向き合い方</h3>
-                    <p>「上手に活用しながら、<strong>自分で考える力も大切にする</strong>。バランスを保ちながら、共に成長していきたいです。」</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Goals Section -->
-        <section id="goals" class="goals">
-            <div class="container">
-                <h2 class="section-title reveal">Class Challenges</h2>
-                <div class="goals-grid">
-                    <div class="goal-item reveal delay-1">
-                        <span class="number">01</span>
-                        <p>日常生活や学習を便利にするアプリの開発への挑戦</p>
-                    </div>
-                    <div class="goal-item reveal delay-2">
-                        <span class="number">02</span>
-                        <p>AIを使ってどこまで効率化や新しい表現ができるかの探求</p>
-                    </div>
+                <h2 class="section-title">Challenge for Convenience</h2>
+                <div class="vision-content">
+                    <p>この授業を通じ、投資判断や学習を爆速化させる「生活を革新するアプリ」の開発に挑戦します。AIを活用し、どこまで個人の表現と効率を極限まで高められるか。その最前線に立ち続けます。</p>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Kai. Built with passion & AI.</p>
+        <div class="container">
+            <p>&copy; 2026 Kai Investment Analysis. All rights reserved.</p>
+            <p class="disclaimer">※当サイトの情報は統計データに基づく分析であり、特定の投資を推奨するものではありません。投資は自己責任で行ってください。</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
