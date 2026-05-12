@@ -499,6 +499,61 @@
                 <span class="signal-badge signal-buy">順張りBUY</span>
             </div>
         </div>
+
+        <!-- フラッグ -->
+        <div class="pattern-card">
+            <svg class="pattern-icon" viewBox="0 0 60 40" stroke="#10b981" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M5 35 L20 15 L30 20 L40 10 L55 5" />
+                <line x1="15" y1="10" x2="45" y2="0" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4" />
+                <line x1="25" y1="25" x2="55" y2="15" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4" />
+            </svg>
+            <div class="pattern-info">
+                <h4>フラッグ (Flag)</h4>
+                <p>小休止後に元のトレンドへ再加速。</p>
+                <span class="signal-badge signal-buy">継続BUY</span>
+            </div>
+        </div>
+
+        <!-- アセンディング・トライアングル -->
+        <div class="pattern-card">
+            <svg class="pattern-icon" viewBox="0 0 60 40" stroke="#10b981" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M5 35 L20 10 L30 25 L40 10 L55 5" />
+                <line x1="15" y1="10" x2="55" y2="10" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4" />
+                <line x1="5" y1="35" x2="45" y2="15" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4" />
+            </svg>
+            <div class="pattern-info">
+                <h4>アセンディング・トライアングル</h4>
+                <p>上値が重いが下値が切り上がる強気形。</p>
+                <span class="signal-badge signal-buy">上抜けBUY</span>
+            </div>
+        </div>
+
+        <!-- ディセンディング・トライアングル -->
+        <div class="pattern-card">
+            <svg class="pattern-icon" viewBox="0 0 60 40" stroke="#ef4444" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M5 5 L20 30 L30 15 L40 30 L55 35" />
+                <line x1="15" y1="30" x2="55" y2="30" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4" />
+                <line x1="5" y1="5" x2="45" y2="25" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4" />
+            </svg>
+            <div class="pattern-info">
+                <h4>ディセンディング・トライアングル</h4>
+                <p>下値が固いが上値が切り下がる弱気形。</p>
+                <span class="signal-badge signal-sell">下抜けSELL</span>
+            </div>
+        </div>
+
+        <!-- カップ・ウィズ・ハンドル -->
+        <div class="pattern-card">
+            <svg class="pattern-icon" viewBox="0 0 60 40" stroke="#10b981" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M5 10 Q 20 40, 35 10 Q 45 20, 55 5" />
+                <line x1="5" y1="10" x2="60" y2="10" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4" />
+            </svg>
+            <div class="pattern-info">
+                <h4>カップ・ウィズ・ハンドル</h4>
+                <p>お椀型底の後に小さく調整して爆発。</p>
+                <span class="signal-badge signal-buy">大化けBUY</span>
+            </div>
+        </div>
     </div>
 </aside>
 </div>
@@ -740,11 +795,39 @@
     function drawChart() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        const minPrice = Math.min(...priceHistory) - 0.02;
-        const maxPrice = Math.max(...priceHistory) + 0.02;
+        const FUTURE_TICKS = 15;
+        const TOTAL_TICKS = CHART_HISTORY_LIMIT + FUTURE_TICKS;
+        
+        let minPrice = Math.min(...priceHistory);
+        let maxPrice = Math.max(...priceHistory);
+        
+        // Calculate Trend (Prediction Slope)
+        let slope = 0;
+        let predY_val = currentPrice;
+        
+        if (priceHistory.length >= 2) {
+            const lookback = Math.min(10, priceHistory.length);
+            let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+            for(let i = 0; i < lookback; i++) {
+                const py = priceHistory[priceHistory.length - lookback + i];
+                sumX += i;
+                sumY += py;
+                sumXY += i * py;
+                sumXX += i * i;
+            }
+            const denom = (lookback * sumXX - sumX * sumX);
+            slope = denom !== 0 ? (lookback * sumXY - sumX * sumY) / denom : 0;
+            predY_val = currentPrice + (slope * FUTURE_TICKS);
+            
+            minPrice = Math.min(minPrice, predY_val);
+            maxPrice = Math.max(maxPrice, predY_val);
+        }
+        
+        minPrice -= 0.02;
+        maxPrice += 0.02;
         const range = maxPrice - minPrice;
         
-        const stepX = canvas.width / (CHART_HISTORY_LIMIT - 1);
+        const stepX = canvas.width / (TOTAL_TICKS - 1);
         
         // Draw Grid
         ctx.strokeStyle = '#1e293b';
@@ -757,14 +840,17 @@
         }
         ctx.stroke();
 
-        // Draw Line
+        // Draw Prediction Range Area
+        const predictionStartX = (priceHistory.length - 1) * stepX;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
+        ctx.fillRect(predictionStartX, 0, canvas.width - predictionStartX, canvas.height);
+
+        // Draw Line (History)
         ctx.beginPath();
         ctx.lineWidth = 3;
-        
-        // Create Gradient
         const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        gradient.addColorStop(0, 'rgba(59, 130, 246, 1)'); // Blue top
-        gradient.addColorStop(1, 'rgba(16, 185, 129, 1)'); // Green bottom
+        gradient.addColorStop(0, 'rgba(59, 130, 246, 1)');
+        gradient.addColorStop(1, 'rgba(16, 185, 129, 1)');
         ctx.strokeStyle = gradient;
 
         priceHistory.forEach((price, index) => {
@@ -773,17 +859,40 @@
             if (index === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
         });
-        
         ctx.stroke();
         
         // Fill area under line
-        ctx.lineTo(canvas.width, canvas.height);
+        ctx.lineTo(predictionStartX, canvas.height);
         ctx.lineTo(0, canvas.height);
         const fillGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
         fillGradient.addColorStop(0, 'rgba(59, 130, 246, 0.2)');
         fillGradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
         ctx.fillStyle = fillGradient;
         ctx.fill();
+
+        // Draw Prediction Line (Future)
+        if (priceHistory.length >= 2) {
+            const lastY = canvas.height - ((currentPrice - minPrice) / range) * canvas.height;
+            const predX = predictionStartX + (FUTURE_TICKS * stepX);
+            const predY = canvas.height - ((predY_val - minPrice) / range) * canvas.height;
+
+            ctx.beginPath();
+            ctx.setLineDash([6, 6]);
+            ctx.lineWidth = 2;
+            
+            // Color based on prediction direction
+            ctx.strokeStyle = slope >= 0 ? 'rgba(16, 185, 129, 0.8)' : 'rgba(239, 68, 68, 0.8)';
+            
+            ctx.moveTo(predictionStartX, lastY);
+            ctx.lineTo(predX, predY);
+            ctx.stroke();
+            ctx.setLineDash([]); // Reset
+            
+            // Draw Prediction Label
+            ctx.fillStyle = ctx.strokeStyle;
+            ctx.font = '10px sans-serif';
+            ctx.fillText('予測', predX - 20, predY - 10);
+        }
 
         // Draw Position Entry Line
         if (position) {
@@ -795,7 +904,7 @@
             ctx.moveTo(0, y);
             ctx.lineTo(canvas.width, y);
             ctx.stroke();
-            ctx.setLineDash([]); // reset
+            ctx.setLineDash([]);
         }
     }
 
