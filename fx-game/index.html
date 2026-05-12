@@ -30,21 +30,135 @@
             font-family: var(--font-family);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
-            overflow: hidden;
+            padding: 20px;
+        }
+
+        .main-wrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        @media (max-width: 900px) {
+            .main-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            body { padding: 0; }
         }
 
         .app-container {
             width: 100%;
             max-width: 500px;
-            height: 100vh;
+            height: calc(100vh - 40px);
+            min-height: 600px;
             display: flex;
             flex-direction: column;
             background-color: var(--bg-color);
-            border-left: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
+
+        @media (max-width: 900px) {
+            .app-container {
+                height: 100vh;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                min-height: auto;
+            }
+        }
+
+        /* Pattern Guide */
+        .pattern-guide {
+            flex: 1;
+            width: 100%;
+            max-width: 500px;
+            height: calc(100vh - 40px);
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 900px) {
+            .pattern-guide {
+                height: auto;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                max-width: 100%;
+            }
+        }
+
+        .pattern-guide h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .pattern-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .pattern-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pattern-icon {
+            width: 60px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        .pattern-info {
+            flex-grow: 1;
+        }
+
+        .pattern-info h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .pattern-info p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .signal-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-top: 6px;
+        }
+
+        .signal-buy { background: rgba(16, 185, 129, 0.2); color: var(--color-buy); }
+        .signal-sell { background: rgba(239, 68, 68, 0.2); color: var(--color-sell); }
 
         /* Header */
         header {
@@ -264,6 +378,7 @@
 </head>
 <body>
 
+<div class="main-wrapper">
 <div class="app-container">
     <header>
         <h1>USD/JPY <span>SIMULATOR</span></h1>
@@ -317,6 +432,75 @@
             <button id="btn-restart" class="btn btn-close">RESTART</button>
         </div>
     </div>
+</div>
+
+<aside class="pattern-guide">
+    <h2>チャートパターン (カンペ)</h2>
+    <div class="pattern-grid">
+        <!-- ダブルボトム -->
+        <div class="pattern-card">
+            <svg class="pattern-icon" viewBox="0 0 60 40" stroke="#10b981" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M5 5 L20 35 L30 15 L40 35 L55 5" />
+                <line x1="10" y1="15" x2="50" y2="15" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4" />
+            </svg>
+            <div class="pattern-info">
+                <h4>ダブルボトム (W型)</h4>
+                <p>2度底を打ち、上昇に転じるサイン。</p>
+                <span class="signal-badge signal-buy">BUY推奨</span>
+            </div>
+        </div>
+
+        <!-- ダブルトップ -->
+        <div class="pattern-card">
+            <svg class="pattern-icon" viewBox="0 0 60 40" stroke="#ef4444" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M5 35 L20 5 L30 25 L40 5 L55 35" />
+                <line x1="10" y1="25" x2="50" y2="25" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4" />
+            </svg>
+            <div class="pattern-info">
+                <h4>ダブルトップ (M型)</h4>
+                <p>2度天井を打ち、下落に転じるサイン。</p>
+                <span class="signal-badge signal-sell">SELL推奨</span>
+            </div>
+        </div>
+
+        <!-- 逆三尊 -->
+        <div class="pattern-card">
+            <svg class="pattern-icon" viewBox="0 0 60 40" stroke="#10b981" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M5 10 L15 25 L25 15 L30 35 L35 15 L45 25 L55 10" />
+            </svg>
+            <div class="pattern-info">
+                <h4>逆三尊 (逆H&S)</h4>
+                <p>中央の谷が最も深い3つの谷。強い上昇。</p>
+                <span class="signal-badge signal-buy">BUY推奨</span>
+            </div>
+        </div>
+
+        <!-- 三尊 -->
+        <div class="pattern-card">
+            <svg class="pattern-icon" viewBox="0 0 60 40" stroke="#ef4444" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M5 30 L15 15 L25 25 L30 5 L35 25 L45 15 L55 30" />
+            </svg>
+            <div class="pattern-info">
+                <h4>三尊 (Head & Shoulders)</h4>
+                <p>中央の山が最も高い3つの山。強い下落。</p>
+                <span class="signal-badge signal-sell">SELL推奨</span>
+            </div>
+        </div>
+
+        <!-- トレンドブレイク -->
+        <div class="pattern-card">
+            <svg class="pattern-icon" viewBox="0 0 60 40" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M5 30 L15 25 L20 28 L30 20 L35 22 L45 5 L55 8" stroke="#10b981" stroke-width="3" />
+                <line x1="5" y1="35" x2="40" y2="15" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-dasharray="4" />
+            </svg>
+            <div class="pattern-info">
+                <h4>トレンドブレイク</h4>
+                <p>サポートラインで反発し続ける上昇。</p>
+                <span class="signal-badge signal-buy">順張りBUY</span>
+            </div>
+        </div>
+    </div>
+</aside>
 </div>
 
 <script>
