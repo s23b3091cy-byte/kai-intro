@@ -211,6 +211,43 @@
             color: var(--text-main);
         }
 
+        .leaderboard {
+            margin: 20px 0;
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .leaderboard h3 {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .score-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 16px;
+        }
+
+        .score-item:last-child {
+            border-bottom: none;
+        }
+
+        .rank-1 { color: #facc15; font-weight: bold; } /* Gold */
+        .rank-2 { color: #cbd5e1; font-weight: bold; } /* Silver */
+        .rank-3 { color: #b45309; font-weight: bold; } /* Bronze */
+
         #btn-restart {
             width: 100%;
         }
@@ -269,6 +306,14 @@
         <div class="overlay-content">
             <h2>Game Over</h2>
             <p>最終資金<br><span id="final-balance"></span> 円</p>
+            
+            <div class="leaderboard">
+                <h3>🏆 TOP 3 BEST SCORES</h3>
+                <ul class="score-list" id="score-list">
+                    <!-- Scores injected via JS -->
+                </ul>
+            </div>
+
             <button id="btn-restart" class="btn btn-close">RESTART</button>
         </div>
     </div>
@@ -404,6 +449,39 @@
         }
 
         elFinalBalance.textContent = formatJPY(balance);
+        
+        // --- Leaderboard Logic ---
+        let scores = JSON.parse(localStorage.getItem('fxGameScores') || '[]');
+        
+        // Add current score
+        scores.push(balance);
+        
+        // Sort descending
+        scores.sort((a, b) => b - a);
+        
+        // Keep top 3
+        scores = scores.slice(0, 3);
+        
+        // Save back to local storage
+        localStorage.setItem('fxGameScores', JSON.stringify(scores));
+        
+        // Render leaderboard
+        const scoreList = document.getElementById('score-list');
+        scoreList.innerHTML = '';
+        
+        if (scores.length === 0) {
+             scoreList.innerHTML = '<li class="score-item" style="color:var(--text-muted); justify-content:center;">No scores yet</li>';
+        } else {
+            scores.forEach((score, index) => {
+                const li = document.createElement('li');
+                li.className = 'score-item';
+                const rankClass = `rank-${index + 1}`;
+                li.innerHTML = `<span class="${rankClass}">#${index + 1}</span> <span>${formatJPY(score)} 円</span>`;
+                scoreList.appendChild(li);
+            });
+        }
+        // --- End Leaderboard Logic ---
+
         overlay.classList.remove('hidden');
     }
 
